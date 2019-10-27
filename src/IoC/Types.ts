@@ -4,4 +4,5 @@ export const Types ={
     ILogger: Symbol('Ilogger'),
     IRunMode: Symbol('IRunMode'),
     IStartupArgs: Symbol('IStartupArgs'),
+    IHttp: Symbol('IHttp'),
 }

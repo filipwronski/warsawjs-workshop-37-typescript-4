@@ -3,6 +3,7 @@ import { Container } from "inversify";
 import { Main } from "../Main";
 import { ConsoleLogger } from "../ConsoleLogger";
 import { Types } from './Types';
+import TemperatureSensor, { Http, IHttp } from '../TemperatureSensor';
 
 export const IoC = new Container();
 
@@ -13,4 +14,5 @@ export const IoC = new Container();
 // isSingletonScope te same instancje samo w obrębie aplikacji i w obrębie klientów
 IoC.bind<Main>(Main).toSelf().inSingletonScope; // IoC.bind(Main).to(Main);
 IoC.bind(Types.ILogger).to(ConsoleLogger);
-
+IoC.bind(TemperatureSensor).toSelf().inSingletonScope();
+IoC.bind<IHttp>(Types.IHttp).to(Http).inTransientScope();
