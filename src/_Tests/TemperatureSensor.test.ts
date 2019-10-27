@@ -1,19 +1,17 @@
-import TemperatureSensor, { IHttp } from "../TemperatureSensor";
+import 'reflect-metadata'
 
-class HttpMock implements IHttp {
-    public get() {
-        return 5;
-    }
-}
 
-describe(TemperatureSensor.name, () => {
-    it('should convert temperature', () => {
-        const httpMock = new HttpMock()
-
-        const systemUnderTest = new TemperatureSensor(httpMock);
-
-        const result = systemUnderTest.getTemperature();
-
-        expect(result).toBe(8.5);
-    })
+import { Mock, It } from 'moq.ts'
+import TemperatureSensor, { IHttp } from '../TemperatureSensor';
+import { WeatherApi } from '../WeatherApi';
+describe('TemperatureSensor tests', () => {
+   it('should convert Celcius to Fahrenheit', () => {
+       const weatherApiMock = new Mock<WeatherApi>();
+       weatherApiMock.setup(m => m.getTemperature()).returns(5);
+       const unitUnderTest: TemperatureSensor = new TemperatureSensor(weatherApiMock.object());
+       
+       let result: Promise<number> = unitUnderTest.getTemperature();
+       
+       expect(result).toBe(8.5);
+   })
 })

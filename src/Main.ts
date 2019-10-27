@@ -12,7 +12,7 @@ export class Main
 
     public async Start(): Promise<void>
     {
-        const temperature = this._temp.getTemperature();
+        const temperature = await this._temp.getTemperature();
 
         this._log.log('Sensor temperature: ' + temperature + ' *F');
     }

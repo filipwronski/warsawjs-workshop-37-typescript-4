@@ -1,26 +1,27 @@
 import 'reflect-metadata';
 import { injectable, inject } from "inversify";
-import { Types } from "./IoC/Types";
+import axios, {AxiosResponse} from 'axios';
+import { WeatherApi } from './WeatherApi';
 
 export interface IHttp {
-    get(url: string): number;
+    get<T>(url: string): Promise<T>;
 }
 
 @injectable()
 export class Http implements IHttp {
-    public get(url: string): number {
-        return 14;
+    public async get<T>(url: string): Promise<T> {
+        const response: AxiosResponse<T> = await axios.get(url);
+
+        return response.data;
     }
 }
 
 @injectable()
 export default class TemperatureSensor {
-    constructor(@inject(Types.IHttp) private _http: IHttp) {
-        
-    }
+    constructor(private _weatherApi: WeatherApi) {}
 
-    public getTemperature() {
-        const tempInCelcius = this._http.get('192.168.1.7'); //todo move to config
+    public async getTemperature() {
+        const tempInCelcius = await this._weatherApi.getTemperature();
 
         return this.celciusToFahreinheit(tempInCelcius);
     }
