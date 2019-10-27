@@ -1,8 +1,7 @@
-export const Types =
-{
+export const Types ={
     ISample: Symbol('ISample'),
-    IEnvironment: Symbol('IEnvironment'),
-    ILogger: Symbol('ILogger'),
+    IEnviroment: Symbol('IEnviroment'),
+    ILogger: Symbol('Ilogger'),
     IRunMode: Symbol('IRunMode'),
-    IStartupArgs: Symbol('IStartupArgs')
-};
+    IStartupArgs: Symbol('IStartupArgs'),
+}
