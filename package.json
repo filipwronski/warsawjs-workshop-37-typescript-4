@@ -42,7 +42,7 @@
     "dependencies": {
         "async-delay": "^1.0.3",
         "asyncawait": "^1.0.7",
-        "axios": "^0.17.1",
+        "axios": "^0.21.1",
         "dotenv": "^4.0.0",
         "git-rev": "^0.2.1",
         "inversify": "^4.1.0",
